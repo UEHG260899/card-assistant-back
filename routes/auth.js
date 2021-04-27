@@ -1,10 +1,11 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos, validarJWT } = require('../middlewares/validaciones');
+const { crearUsuario } = require('../controllers/auth');
 
 
 const regExpPass = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
-const regExpNom = "^(a-zA-Z){6}$";
+const regExpNom = "^[a-zA-Z ]{2,10}$";
 
 
 const router = Router();
@@ -20,7 +21,7 @@ router.post('/new', [
     check('email', "El email es un campo obligatorio").notEmpty().isEmail(),
     check('password', "La contraseña es un campo requierido").notEmpty().matches(regExpPass),
     validarCampos
-]);
+], crearUsuario);
 
 
 //Login

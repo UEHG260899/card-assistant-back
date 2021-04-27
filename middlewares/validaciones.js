@@ -2,19 +2,19 @@ const { request, response } = require('express');
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 
-const validarCampos = (req = request, resp = response) => {
+const validarCampos = (req = request, resp = response, next) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()){
         return resp.status(400).json({
             ok : false,
             errors : errors.mapped()
-        })
+        });
     }
-    next();
+    next()
 }
 
 
-const validarJWT = (req = request, resp = response) => {
+const validarJWT = (req = request, resp = response, next) => {
     const token = req.header('x-token');
     if(!token){
         return resp.status(401).json({
