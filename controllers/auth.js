@@ -27,6 +27,7 @@ const crearUsuario = async (req = request, resp = response) => {
 
         return resp.status(201).json({
             ok : true,
+            uid : dbUsuario.id,
             email,
             nombre,
             token
@@ -66,6 +67,7 @@ const loginUsuario = async (req = request, resp = response) => {
 
         resp.status(200).json({
             ok : true,
+            uid : dbUser.id,
             email,
             nombre : dbUser.nombre,
             token
