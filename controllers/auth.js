@@ -62,7 +62,7 @@ const loginUsuario = async (req = request, resp = response) => {
         }
 
         //JWT
-        const token = await generarJWT(dbUser.id, dbUser.nombre);
+        const token = await generarJWT(dbUser.id, email, dbUser.nombre);
 
         resp.status(200).json({
             ok : true,
@@ -79,8 +79,21 @@ const loginUsuario = async (req = request, resp = response) => {
     }
 }
 
+const renewToken = async(req = request, resp = response) => {
+    const { uid, email, nombre } = req;
+    const token = await generarJWT(uid, email, nombre);
+    return resp.json({
+        ok : true,
+        uid,
+        email,
+        nombre,
+        token
+    })
+}
+
 
 module.exports = {
     crearUsuario,
-    loginUsuario
+    loginUsuario,
+    renewToken
 }

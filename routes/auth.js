@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos, validarJWT } = require('../middlewares/validaciones');
-const { crearUsuario, loginUsuario } = require('../controllers/auth');
+const { crearUsuario, loginUsuario, renewToken } = require('../controllers/auth');
 
 
 const regExpPass = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
@@ -32,8 +32,7 @@ router.post('/' , [
 ], loginUsuario);
 
 //Renovar token
-
-router.get('/renew', validarJWT);
+router.get('/renew', validarJWT, renewToken);
 
 
 
