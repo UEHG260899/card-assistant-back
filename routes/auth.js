@@ -16,8 +16,6 @@ router.post('/new', [
     check('nombre', "El nombre no tiene el formato requierido").matches(regExpNom),
     check('apPat', "El apellido paterno es obligatorio").notEmpty(),
     check('apPat', "El apellido paterno no cumple con el formato").matches(regExpNom),
-    check('apMat', "El apellido materno es obligatorio").notEmpty(),
-    check('apMat', "El apellido materno no cumple con el formato").matches(regExpNom),
     check('email', "El email es un campo obligatorio").notEmpty().isEmail(),
     check('password', "La contraseña es un campo requierido").notEmpty().matches(regExpPass),
     validarCampos

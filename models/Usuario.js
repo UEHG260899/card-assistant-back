@@ -10,10 +10,6 @@ const UsuarioSchema = Schema({
         type : String,
         required : true
     },
-    apMat : {
-        type : String,
-        required : true
-    },
     email : {
         type : String,
         required : true,

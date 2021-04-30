@@ -4,7 +4,7 @@ const Usuario = require('../models/Usuario');
 const bCrypt = require('bcryptjs');
 
 const crearUsuario = async (req = request, resp = response) => {
-    const { nombre, apMat, email, password} = req.body;
+    const { nombre, apPat, email, password} = req.body;
 
     try {
         const usuario = await Usuario.findOne( {email} );
