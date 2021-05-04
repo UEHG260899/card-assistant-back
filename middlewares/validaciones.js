@@ -24,15 +24,18 @@ const validarJWT = (req = request, resp = response, next) => {
     }
 
     try {
-        const { uid, email } = jwt.verify(token, process.env.SECRET_JWT_SEED);
+        const { uid, email, nombre } = jwt.verify(token, process.env.SECRET_JWT_SEED);
         req.uid = uid;
         req.email = email;
+        req.nombre = nombre;
     }catch(err){
         return resp.status(401).json({
             ok : false,
             msg : 'Ocurrio un error al validar su token'
         });
     }
+
+    next();
 }
 
 

@@ -4,7 +4,7 @@ const Usuario = require('../models/Usuario');
 const bCrypt = require('bcryptjs');
 
 const crearUsuario = async (req = request, resp = response) => {
-    const { nombre, apMat, email, password} = req.body;
+    const { nombre, apPat, email, password} = req.body;
 
     try {
         const usuario = await Usuario.findOne( {email} );
@@ -27,6 +27,7 @@ const crearUsuario = async (req = request, resp = response) => {
 
         return resp.status(201).json({
             ok : true,
+            uid : dbUsuario.id,
             email,
             nombre,
             token
@@ -62,10 +63,11 @@ const loginUsuario = async (req = request, resp = response) => {
         }
 
         //JWT
-        const token = await generarJWT(dbUser.id, dbUser.nombre);
+        const token = await generarJWT(dbUser.id, email, dbUser.nombre);
 
         resp.status(200).json({
             ok : true,
+            uid : dbUser.id,
             email,
             nombre : dbUser.nombre,
             token
@@ -79,8 +81,21 @@ const loginUsuario = async (req = request, resp = response) => {
     }
 }
 
+const renewToken = async(req = request, resp = response) => {
+    const { uid, email, nombre } = req;
+    const token = await generarJWT(uid, email, nombre);
+    return resp.json({
+        ok : true,
+        uid,
+        email,
+        nombre,
+        token
+    })
+}
+
 
 module.exports = {
     crearUsuario,
-    loginUsuario
+    loginUsuario,
+    renewToken
 }

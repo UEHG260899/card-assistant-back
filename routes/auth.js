@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos, validarJWT } = require('../middlewares/validaciones');
-const { crearUsuario, loginUsuario } = require('../controllers/auth');
+const { crearUsuario, loginUsuario, renewToken } = require('../controllers/auth');
 
 
 const regExpPass = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
@@ -16,8 +16,6 @@ router.post('/new', [
     check('nombre', "El nombre no tiene el formato requierido").matches(regExpNom),
     check('apPat', "El apellido paterno es obligatorio").notEmpty(),
     check('apPat', "El apellido paterno no cumple con el formato").matches(regExpNom),
-    check('apMat', "El apellido materno es obligatorio").notEmpty(),
-    check('apMat', "El apellido materno no cumple con el formato").matches(regExpNom),
     check('email', "El email es un campo obligatorio").notEmpty().isEmail(),
     check('password', "La contraseña es un campo requierido").notEmpty().matches(regExpPass),
     validarCampos
@@ -32,8 +30,7 @@ router.post('/' , [
 ], loginUsuario);
 
 //Renovar token
-
-router.get('/renew', validarJWT);
+router.get('/renew', validarJWT, renewToken);
 
 
 

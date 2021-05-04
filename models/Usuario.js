@@ -1,5 +1,32 @@
 const { Schema, model } = require('mongoose');
-const Tarjeta = require('./Tarjeta');
+
+const TarjetaSchema = Schema({
+    noTarjeta : {
+        type : Number,
+        required : true
+    },
+    banco : {
+        type : String,
+        required : true
+    },
+    dia_corte : {
+        type : Number,
+        required : true 
+    },
+    dia_venc : {
+        type : Number,
+        required : true
+    },
+    limite : {
+        type : Number,
+        required : true
+    },
+    saldo : {
+        type : Number,
+        required : true
+    }
+});
+
 
 const UsuarioSchema = Schema({
     nombre : {
@@ -7,10 +34,6 @@ const UsuarioSchema = Schema({
         required : true
     },
     apPat : {
-        type : String,
-        required : true
-    },
-    apMat : {
         type : String,
         required : true
     },
@@ -23,7 +46,7 @@ const UsuarioSchema = Schema({
         type : String,
         required : true
     },
-    tarjetas : [Tarjeta]
+    tarjetas : [TarjetaSchema]
 });
 
 
