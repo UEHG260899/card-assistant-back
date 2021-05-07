@@ -30,6 +30,6 @@ router.get('/:id', getInfoTarjeta);
 
 
 //Obtener todas las tarjetas
-router.get('/tarjetas', getTarjetas);
+router.get('/', getTarjetas);
 
 module.exports = router;
