@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validaciones');
-const { crearTarjeta, getTarjetas, getInfoTarjeta } = require('../controllers/tarjeta');
+const { crearTarjeta, getTarjetas, getInfoTarjeta, eliminaTarjeta } = require('../controllers/tarjeta');
 
 const regExpTarjeta = '^[0-9]{4}$';
 const regExpDia = '^[0-9]{1,2}$';
@@ -31,5 +31,8 @@ router.get('/:id', getInfoTarjeta);
 
 //Obtener todas las tarjetas
 router.get('/', getTarjetas);
+
+//Eliminar una tarjeta
+router.delete('/:id', eliminaTarjeta);
 
 module.exports = router;
