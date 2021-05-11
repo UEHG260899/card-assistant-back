@@ -14,6 +14,7 @@ app.use( express.json() )
 
 app.use( '/api/auth', require('./routes/auth') );
 app.use( '/api/tarjeta', require('./routes/tarjeta') );
+app.use( '/api/gasto', require('./routes/gasto') );
 
 app.listen(process.env.PORT, () => {
     console.log(`Servidor corriendo en el puerto: ${process.env.PORT}`);
