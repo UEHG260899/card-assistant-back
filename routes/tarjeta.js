@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validaciones');
-const { crearTarjeta } = require('../controllers/tarjeta');
+const { crearTarjeta, getTarjetas, getInfoTarjeta, eliminaTarjeta } = require('../controllers/tarjeta');
 
 const regExpTarjeta = '^[0-9]{4}$';
 const regExpDia = '^[0-9]{1,2}$';
@@ -23,5 +23,16 @@ router.post('/', [
     check('saldo', 'El campo saldo solo acepta de 4 a 7 numeros').matches(regExpLimite),
     validarCampos
 ], crearTarjeta);
+
+
+//Obtener una tarjeta
+router.get('/:id', getInfoTarjeta);
+
+
+//Obtener todas las tarjetas
+router.get('/', getTarjetas);
+
+//Eliminar una tarjeta
+router.delete('/:id', eliminaTarjeta);
 
 module.exports = router;
